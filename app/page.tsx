@@ -2,6 +2,7 @@
 import { useEffect, useRef } from 'react';
 import React from 'react'
 import {createRoot} from 'react-dom/client'
+import { Suspense } from 'react'
 
 import dynamic from 'next/dynamic';
 import { useState } from 'react';
@@ -105,13 +106,17 @@ const DynamicTextarea = () => {
       
 
    
-   
-{conversation.map((d)=>{
+    <Suspense fallback={<p>Loading feed...</p>}>
+       
+    {conversation.map((d)=>{
   return <>
   <ReactMarkdown>{d}</ReactMarkdown>
   <div className='w-full h-px bg-gray-300 rounded-md mt-4 mb-4'></div>
   </>
 })}
+      </Suspense>
+
+
 
       <div className='h-32 w-full'></div>
 
